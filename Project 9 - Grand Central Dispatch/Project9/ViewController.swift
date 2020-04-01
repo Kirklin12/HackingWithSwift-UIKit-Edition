@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Project7
+//  Project9
 //
 //  Created by Mike on 2019-04-01.
 //  Copyright © 2019 Mike. All rights reserved.
@@ -22,6 +22,10 @@ class ViewController: UITableViewController {
   
         navigationItem.leftBarButtonItems = [filter, refresh]
         
+        performSelector(inBackground: #selector(fetchJSON), with: nil) // run fetchJSON method in the background
+    }
+    
+    @objc  func fetchJSON() {
         let urlString: String
         
         if navigationController?.tabBarItem.tag == 0 {
@@ -36,11 +40,11 @@ class ViewController: UITableViewController {
                 return
             }
         }
-            
-        showError()
+        
+        performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
     }
     
-    func showError() {
+    @objc func showError() {
         let ac = UIAlertController(title: "Loading error", message: "There was a problem loading the feed; please check your connection and try again.", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "ok", style: .default))
         present(ac, animated: true)
@@ -52,7 +56,9 @@ class ViewController: UITableViewController {
         if let jsonPetitions = try? decoder.decode(Petitions.self, from: json) {
             petitions = jsonPetitions.results
             filteredPetitions = petitions
-            tableView.reloadData()
+            tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+        } else {
+            performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
         }
     }
 
@@ -88,11 +94,7 @@ class ViewController: UITableViewController {
         let submitAction = UIAlertAction(title: "Submit", style: .default) {
             [weak self, weak ac] action in
             guard let keyword = ac?.textFields?[0].text else { return }
-            
-            if ac?.textFields?[0].text != "" {
-               self?.submit(keyword)
-            }
-            
+            self?.submit(keyword)
             return
         }
         
@@ -100,19 +102,15 @@ class ViewController: UITableViewController {
         present(ac, animated: true)
     }
     
-   
-    
     func submit (_ keyword: String) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.filteredPetitions.removeAll()
-            
-            for petition in self.petitions {
-                if petition.title.contains(keyword) || petition.body.contains(keyword) {
-                    self.filteredPetitions.append(petition)
-                }
+        filteredPetitions.removeAll()
+        
+        for petition in petitions {
+            if petition.title.contains(keyword) || petition.body.contains(keyword) {
+                filteredPetitions.append(petition)
             }
-            self.tableView.reloadData()
         }
+        tableView.reloadData()
     }
     
      @objc func refreshApp() {
@@ -120,3 +118,4 @@ class ViewController: UITableViewController {
         tableView.reloadData()
     }
 }
+
