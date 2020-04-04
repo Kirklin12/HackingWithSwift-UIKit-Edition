@@ -1,0 +1,1 @@
+UserDefaults, NSCoding, Codable, NSKeyedArchiver

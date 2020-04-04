@@ -18,7 +18,7 @@ class ViewController: UITableViewController {
         title = "Storm Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        performSelector(inBackground: #selector(fetchPictures), with: nil)
+        fetchPictures()
         
         let defaults = UserDefaults.standard
         //defaults.removeObject(forKey: "pictures")
