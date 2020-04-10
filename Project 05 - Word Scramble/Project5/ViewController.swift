@@ -62,7 +62,7 @@ class ViewController: UITableViewController {
         present(ac, animated: true)
     }
     
-    func submit (_ answer: String) {
+    func submit (_ answer: String) {  // breakpoint 18.3
         let lowerAnswer = answer.lowercased()
         
         if isPossible(word: lowerAnswer) {

@@ -24,7 +24,7 @@ class DetailViewController: UIViewController {
             imageView.image = UIImage(named: imageToLoad)
         }
         
-        assert(selectedImage != nil, "selectedImage has no value!")//18.2
+        assert(selectedImage != nil, "selectedImage has no value!") //18.2
     }
     
     override func viewWillAppear(_ animated: Bool) {
