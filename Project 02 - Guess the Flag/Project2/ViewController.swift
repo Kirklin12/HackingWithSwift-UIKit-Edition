@@ -103,6 +103,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
     }
     
+    // 21.3
     @objc func scheduleLocalNotification() {
         registerCatrgories()
         
