@@ -1,0 +1,1 @@
+iBeacons (CLLocationManager, CLBeaconRegion, CLProximity)
