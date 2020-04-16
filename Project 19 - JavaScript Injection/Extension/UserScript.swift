@@ -1,8 +1,8 @@
 //
-//  Script.swift
+//  UserScript.swift
 //  Extension
 //
-//  Created by Mike on 2020-04-11.
+//  Created by Mike on 2020-04-16.
 //  Copyright © 2020 Mike. All rights reserved.
 //
 

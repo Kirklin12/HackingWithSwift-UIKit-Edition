@@ -16,13 +16,17 @@ class ActionViewController: UIViewController {
     var pageURL = ""
     
     let defaults = UserDefaults.standard //2
-    //var userScript = [UserScript]()
+    var userScript = [UserScript]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // 3
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        let saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveUserScript))
+        //let openUserScriptsBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(openUserScripts))
+        navigationItem.leftBarButtonItems = [doneBtn, saveBtn]
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showScripts))
         
         //let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.done))
@@ -61,19 +65,21 @@ class ActionViewController: UIViewController {
         saveUserScript()
     }
     
-//    @objc func saveScript() {
-//        var scriptTitle: String!
-//        let ac = UIAlertController(title: "Save script", message: nil, preferredStyle: .alert)
-//        ac.addTextField()
-//
-//
-//        ac.addAction(UIAlertAction(title: "Save", style: .default) { [weak self, weak ac] _ in
-//            guard let scriptTitle = ac?.textFields?[0].text else { return }
-//            userScript.title = scriptTitle
-//        })
-//
-//         present(ac, animated: true)
-//    }
+    @objc func saveUserScript() {
+        var scriptTitle: String!
+        let ac = UIAlertController(title: "Save script", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        
+        ac.addAction(UIAlertAction(title: "Save", style: .default) { [weak self, weak ac] _ in
+            guard let scriptTitle = ac?.textFields?[0].text else { return }
+            self?.defaults.set(self?.script.text, forKey: self!.userScript)
+            //userScript.title = scriptTitle
+        })
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .default))
+
+        present(ac, animated: true)
+    }
     
 //    func saveScript2(action: UIAlertAction) {
 //        action.textfi
