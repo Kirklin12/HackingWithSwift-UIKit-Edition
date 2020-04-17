@@ -1,1 +1,1 @@
-Safari extensions, UITextView, NotificationCenter
+Safari extensions, UITextView, NotificationCenter + UserDefaults, NSKeyedArchiver

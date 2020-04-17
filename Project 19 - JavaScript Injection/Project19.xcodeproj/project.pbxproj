@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		270BCFF224485C83003CAF7A /* UserScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270BCFF124485C83003CAF7A /* UserScript.swift */; };
+		270BCFF42449E484003CAF7A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270BCFF32449E484003CAF7A /* TableViewController.swift */; };
 		2716392A244205B300FD5EF8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 27163929244205B300FD5EF8 /* README.md */; };
 		278E74BC23709DE90017A6C2 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = 278E74BB23709DE90017A6C2 /* Action.js */; };
 		27D1B4D923707295006D442A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1B4D823707295006D442A /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		270BCFF124485C83003CAF7A /* UserScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScript.swift; sourceTree = "<group>"; };
+		270BCFF32449E484003CAF7A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		2712BF142371BD1100777701 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Extension.entitlements; sourceTree = "<group>"; };
 		27163929244205B300FD5EF8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		278E74BB23709DE90017A6C2 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				2712BF142371BD1100777701 /* Extension.entitlements */,
 				27D1B4F22370742C006D442A /* Media.xcassets */,
 				27D1B4F42370742C006D442A /* ActionViewController.swift */,
+				270BCFF32449E484003CAF7A /* TableViewController.swift */,
 				270BCFF124485C83003CAF7A /* UserScript.swift */,
 				27D1B4F62370742C006D442A /* MainInterface.storyboard */,
 				27D1B4F92370742C006D442A /* Info.plist */,
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27D1B4F52370742C006D442A /* ActionViewController.swift in Sources */,
+				270BCFF42449E484003CAF7A /* TableViewController.swift in Sources */,
 				270BCFF224485C83003CAF7A /* UserScript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

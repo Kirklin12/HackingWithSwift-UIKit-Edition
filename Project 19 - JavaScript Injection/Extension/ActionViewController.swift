@@ -15,27 +15,29 @@ class ActionViewController: UIViewController {
     var pageTitle = ""
     var pageURL = ""
     
-    let defaults = UserDefaults.standard //2
-    var userScript = [UserScript]()
+    let defaults = UserDefaults.standard // 2
+    
+    // 3
+    var userScripts = [UserScript]()
+    var userScriptToShow = String()
+    var userScriptText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // 3
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         let saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveUserScript))
-        //let openUserScriptsBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(openUserScripts))
         navigationItem.leftBarButtonItems = [doneBtn, saveBtn]
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showScripts))
+        let showScriptsBtn = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showScripts))
+        let openUserScriptsBtn = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(openUserScripts))
+        navigationItem.rightBarButtonItems = [showScriptsBtn, openUserScriptsBtn]
         
-        //let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.done))
-        //let save = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveScript))
-        //navigationItem.leftBarButtonItems = [done, save]
-
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
         
         if let inputItem = extensionContext?.inputItems.first as? NSExtensionItem {
             if let itemProvider = inputItem.attachments?.first {
@@ -48,9 +50,19 @@ class ActionViewController: UIViewController {
                     DispatchQueue.main.async {
                         self?.title = self?.pageTitle
                         self?.script.text = self?.defaults.string(forKey: self!.pageURL) //2
+                        
+                        // 3
+                        self?.userScripts = NSKeyedUnarchiver.unarchiveObject(with: self?.defaults.object(forKey: "userScripts") as! Data) as! [UserScript]
                     }
                 }
             }
+        }
+    }
+    
+    // 3
+    override func viewWillAppear(_ animated: Bool) {
+        if !userScriptToShow.isEmpty {
+            script.text = userScriptToShow
         }
     }
 
@@ -62,28 +74,8 @@ class ActionViewController: UIViewController {
         item.attachments = [customJavaScript]
         extensionContext?.completeRequest(returningItems: [item])
         
-        saveUserScript()
+        saveScriptOnPage()
     }
-    
-    @objc func saveUserScript() {
-        var scriptTitle: String!
-        let ac = UIAlertController(title: "Save script", message: nil, preferredStyle: .alert)
-        ac.addTextField()
-        
-        ac.addAction(UIAlertAction(title: "Save", style: .default) { [weak self, weak ac] _ in
-            guard let scriptTitle = ac?.textFields?[0].text else { return }
-            self?.defaults.set(self?.script.text, forKey: self!.userScript)
-            //userScript.title = scriptTitle
-        })
-        
-        ac.addAction(UIAlertAction(title: "Cancel", style: .default))
-
-        present(ac, animated: true)
-    }
-    
-//    func saveScript2(action: UIAlertAction) {
-//        action.textfi
-//    }
     
     @objc func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -103,15 +95,6 @@ class ActionViewController: UIViewController {
         }
     }
     
-    //1
-    @objc func showScripts() {
-        let ac = UIAlertController(title: "Scripts", message: nil, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Show page title", style: .default, handler: setScript))
-        ac.addAction(UIAlertAction(title: "Show page url", style: .default, handler: setScript))
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
-    }
-    
     func setScript(action: UIAlertAction) {
         guard let actionTitle = action.title else { return }
         //actionTitle
@@ -123,8 +106,48 @@ class ActionViewController: UIViewController {
        }
     }
     
-    //2
-    func saveUserScript() {
+    // 1
+    @objc func showScripts() {
+        let ac = UIAlertController(title: "Scripts", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Show page title", style: .default, handler: setScript))
+        ac.addAction(UIAlertAction(title: "Show page url", style: .default, handler: setScript))
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    }
+    
+    // 2
+    func saveScriptOnPage() {
         defaults.set(script.text, forKey: pageURL)
+    }
+    
+    // 3
+    @objc func saveUserScript() {
+        let ac = UIAlertController(title: "Save script", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        
+        ac.addAction(UIAlertAction(title: "Save", style: .default) { [weak self, weak ac] _ in
+            guard var scriptTitle = ac?.textFields?[0].text else { return }
+            
+            if scriptTitle == "" {
+                scriptTitle = "Unnamed"
+            }
+            
+            let userScript = UserScript(title: scriptTitle, text: self!.script.text)
+            self?.userScripts.append(userScript)
+            
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: self?.userScripts)
+            self?.defaults.set(encodedData, forKey: "userScripts")
+        })
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .default))
+        present(ac, animated: true)
+    }
+    
+    // 3
+    @objc func openUserScripts() {
+        let vc = TableViewController()
+        vc.userScripts = userScripts
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
