@@ -32,14 +32,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    var level = 1
+    
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "background")
+        background.name = "background"
         background.position = CGPoint(x: 512, y: 384)
         background.blendMode = .replace
         background.zPosition = -1
         addChild(background)
         
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        scoreLabel.name = "score"
         scoreLabel.text = "Score: 0"
         scoreLabel.horizontalAlignmentMode = .left
         scoreLabel.position = CGPoint(x: 16, y: 16)
@@ -57,7 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func loadLevel() {
-        guard let levelURL = Bundle.main.url(forResource: "level1", withExtension: "txt") else {
+        guard let levelURL = Bundle.main.url(forResource: "level\(level)", withExtension: "txt") else {
             fatalError("Could not find level1.txt in the app bundle.")
         }
         guard let levelString = try? String(contentsOf: levelURL) else {
@@ -69,35 +73,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for (row, line) in lines.reversed().enumerated() {
             for (column, letter) in line.enumerated() {
                 let position = CGPoint(x: (64 * column) + 32, y: (64 * row) + 32)
-                
                 if letter == "x" {
                     // load wall
                     let node = SKSpriteNode(imageNamed: "block")
+                    node.position = position
+
+                    node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
                     node.physicsBody?.categoryBitMask = CollisionTypes.wall.rawValue
-                    
-                    setNodeParameters(node: node, position: position, name: "", isWall: false)
+                    node.physicsBody?.isDynamic = false
+                    addChild(node)
                 } else if letter == "v" {
                     // load vortex
                     let node = SKSpriteNode(imageNamed: "vortex")
+                    setNodeParameters(node: node, position: position, name: "vortex")
+                    
                     node.run(SKAction.repeatForever(SKAction.rotate(byAngle: .pi, duration: 1)))
                     node.physicsBody?.categoryBitMask = CollisionTypes.vortex.rawValue
                     node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
-                    
-                    setNodeParameters(node: node, position: position, name: "vortex", isWall: false)
                 } else if letter == "s" {
                     // load star
                     let node = SKSpriteNode(imageNamed: "star")
+                    setNodeParameters(node: node, position: position, name: "star")
+                    
                     node.physicsBody?.categoryBitMask = CollisionTypes.star.rawValue
                     node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
-                    
-                    setNodeParameters(node: node, position: position, name: "star", isWall: false)
                 } else if letter == "f" {
                     // load finish point
                     let node = SKSpriteNode(imageNamed: "finish")
+                    setNodeParameters(node: node, position: position, name: "finish")
+                    
                     node.physicsBody?.categoryBitMask = CollisionTypes.finish.rawValue
                     node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
-                    
-                    setNodeParameters(node: node, position: position, name: "finish", isWall: false)
                 } else if letter == " " {
                     // this is an ampty space - do nothing!
                 } else {
@@ -108,23 +114,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // 1
-    func setNodeParameters(node: SKSpriteNode, position: CGPoint, name: String, isWall: Bool) {
+    func setNodeParameters(node: SKSpriteNode, position: CGPoint, name: String) {
         node.name = name
-        node.position = position
+        node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
         node.physicsBody?.isDynamic = false
-        
-        if isWall {
-            node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
-        } else {
-            node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
-            node.physicsBody?.collisionBitMask = 0
-        }
-        
+        node.physicsBody?.collisionBitMask = 0
+        node.position = position
         addChild(node)
     }
     
     func createPlayer() {
         player = SKSpriteNode(imageNamed: "player")
+        player.name = "player"
         player.position = CGPoint(x: 96, y: 672)
         player.zPosition = 1
         
@@ -198,7 +199,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.removeFromParent()
             score += 1
         } else if node.name == "finish" {
-            // next level?
+            // 2
+            player.physicsBody?.isDynamic = false
+            isGameOver = true
+            score += 1
+            level += 1
+            
+            for node in self.children {
+                if !(node.name == "background" || node.name == "score") {
+                    node.removeFromParent()
+                }
+            }
+            
+            loadLevel()
+            createPlayer()
+            isGameOver = false
         }
     }
 }

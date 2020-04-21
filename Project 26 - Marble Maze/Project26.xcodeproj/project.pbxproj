@@ -16,6 +16,8 @@
 		27A7DD58244B61DC00D6832C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A7DD56244B61DC00D6832C /* LaunchScreen.storyboard */; };
 		27A7DD60244B67DC00D6832C /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 27A7DD5F244B67DB00D6832C /* level1.txt */; };
 		27A7DD62244B682600D6832C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 27A7DD61244B682600D6832C /* README.md */; };
+		27E72087244F060F00C9D85B /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 27E72086244F060F00C9D85B /* level2.txt */; };
+		27F3D44B244F13B300397C37 /* level3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 27F3D44A244F13B300397C37 /* level3.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		27A7DD59244B61DC00D6832C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27A7DD5F244B67DB00D6832C /* level1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
 		27A7DD61244B682600D6832C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		27E72086244F060F00C9D85B /* level2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
+		27F3D44A244F13B300397C37 /* level3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = level3.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +75,9 @@
 				27A7DD54244B61DC00D6832C /* Assets.xcassets */,
 				27A7DD56244B61DC00D6832C /* LaunchScreen.storyboard */,
 				27A7DD59244B61DC00D6832C /* Info.plist */,
+				27F3D44A244F13B300397C37 /* level3.txt */,
 				27A7DD5F244B67DB00D6832C /* level1.txt */,
+				27E72086244F060F00C9D85B /* level2.txt */,
 			);
 			path = Project26;
 			sourceTree = "<group>";
@@ -135,7 +141,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				27A7DD62244B682600D6832C /* README.md in Resources */,
+				27E72087244F060F00C9D85B /* level2.txt in Resources */,
 				27A7DD60244B67DC00D6832C /* level1.txt in Resources */,
+				27F3D44B244F13B300397C37 /* level3.txt in Resources */,
 				27A7DD53244B61D600D6832C /* Main.storyboard in Resources */,
 				27A7DD4A244B61D600D6832C /* GameScene.sks in Resources */,
 				27A7DD55244B61DC00D6832C /* Assets.xcassets in Resources */,
