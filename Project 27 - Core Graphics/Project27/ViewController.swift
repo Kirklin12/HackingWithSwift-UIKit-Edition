@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     @IBAction func redrawTapped(_ sender: Any) {
         currentDrawType += 1
         
-        if currentDrawType > 5 {
+        if currentDrawType > 6 {
             currentDrawType = 0
         }
         
@@ -45,6 +45,9 @@ class ViewController: UIViewController {
             
         case 5:
             drawImagesAndText()
+            
+        case 6:
+            drawEmoji()
             
         default:
             break
@@ -176,5 +179,26 @@ class ViewController: UIViewController {
         
         imageView.image = image
     }
+    
+    //1
+    func drawEmoji() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+           
+           let image = renderer.image { ctx in
+               let paragraphStyle = NSMutableParagraphStyle()
+               paragraphStyle.alignment = .center
+               
+               let attrs: [NSAttributedString.Key: Any] = [
+                   .font: UIFont.systemFont(ofSize: 60),
+                   .paragraphStyle: paragraphStyle
+               ]
+               
+            let emoji = "⭐"
+               
+            let attributedString = NSAttributedString(string: emoji, attributes: attrs)
+            attributedString.draw(with: CGRect(x: 32, y: 150, width: 448, height: 448), options: .usesLineFragmentOrigin, context: nil)
+           }
+           
+           imageView.image = image
+    }
  }
-
