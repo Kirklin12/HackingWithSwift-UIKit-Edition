@@ -15,6 +15,7 @@ enum CollisionTypes: UInt32 {
     case star = 4
     case vortex = 8
     case finish = 16
+    case teleport = 32
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -33,6 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     var level = 1
+    var teleportFlag = true
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "background")
@@ -103,6 +105,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     setNodeParameters(node: node, position: position, name: "finish")
                     
                     node.physicsBody?.categoryBitMask = CollisionTypes.finish.rawValue
+                    node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
+                } else if letter == "t" {
+                    // 3
+                    let node = SKSpriteNode(imageNamed: "teleport")
+                    setNodeParameters(node: node, position: position, name: "teleport")
+                    
+                    node.run(SKAction.repeatForever(SKAction.rotate(byAngle: .pi, duration: 2)))
+                    node.physicsBody?.categoryBitMask = CollisionTypes.teleport.rawValue
                     node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
                 } else if letter == " " {
                     // this is an ampty space - do nothing!
@@ -214,6 +224,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             loadLevel()
             createPlayer()
             isGameOver = false
+        } else if node.name == "teleport" && teleportFlag == true {
+            // 3
+            var teleportExit: SKNode?
+            teleportFlag = false
+            
+            // searching for the second teleport
+            for secondNode in self.children {
+                if secondNode.name == "teleport" {
+                    if Int(secondNode.position.x) != Int(node.position.x) {
+                        teleportExit = secondNode
+                    }
+                }
+            }
+            
+            let move = SKAction.move(to: node.position, duration: 0.25)
+            let scaleDown = SKAction.scale(to: 0.0001, duration: 0.25)
+            let exit = SKAction.move(to: teleportExit!.position, duration: 0.25)
+            let scaleUp = SKAction.scale(to: 1, duration: 0.25)
+            let sequence = SKAction.sequence([move, scaleDown, exit, scaleUp])
+            
+            player.physicsBody?.isDynamic = false
+            player.run(sequence) { [weak self] in
+                self?.player.physicsBody?.isDynamic = true
+                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
+                    self?.teleportFlag = true
+                }
+            }
         }
     }
 }
