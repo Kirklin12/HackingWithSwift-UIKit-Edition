@@ -111,7 +111,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let node = SKSpriteNode(imageNamed: "teleport")
                     setNodeParameters(node: node, position: position, name: "teleport")
                     
-                    node.run(SKAction.repeatForever(SKAction.rotate(byAngle: .pi, duration: 2)))
+                    node.run(SKAction.repeatForever(SKAction.rotate(byAngle: -.pi, duration: 2)))
                     node.physicsBody?.categoryBitMask = CollisionTypes.teleport.rawValue
                     node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
                 } else if letter == " " {
