@@ -21,6 +21,12 @@ class ViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
+        
+        // 1
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveSecretMessage))
+        navigationItem.leftBarButtonItem?.isEnabled = false
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.clear
+
     }
 
     @IBAction func AuthenticateTapped(_ sender: Any) {
@@ -72,6 +78,9 @@ class ViewController: UIViewController {
         title = "Secret stuff!"
         
         secret.text = KeychainWrapper.standard.string(forKey: "SecretMessage") ?? ""
+        
+        navigationItem.leftBarButtonItem?.isEnabled = true // 1
+        navigationItem.leftBarButtonItem?.tintColor = nil
     }
     
     @objc func saveSecretMessage() {
@@ -81,5 +90,8 @@ class ViewController: UIViewController {
         secret.resignFirstResponder()
         secret.isHidden = true
         title = "Nothing to see here"
+        
+        navigationItem.leftBarButtonItem?.isEnabled = false // 1
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.clear
     }
 }
