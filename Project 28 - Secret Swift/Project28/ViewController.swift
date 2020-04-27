@@ -26,7 +26,9 @@ class ViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveSecretMessage))
         navigationItem.leftBarButtonItem?.isEnabled = false
         navigationItem.leftBarButtonItem?.tintColor = UIColor.clear
-
+        
+        // 2
+        KeychainWrapper.standard.set("password123", forKey: "Password")
     }
 
     @IBAction func AuthenticateTapped(_ sender: Any) {
@@ -49,8 +51,33 @@ class ViewController: UIViewController {
                 }
             }
         } else {
-            let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            // 2
+            let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication. Please, use password instead.", preferredStyle: .alert)
+            ac.addTextField(configurationHandler: {(textField: UITextField!) -> Void in
+                textField.isSecureTextEntry = true
+            })
+            
+            let unlockAction = UIAlertAction(title: "Unlock", style: .default) {
+                [weak self, weak ac] action in
+             //   ac?.textFields?[0].isSecureTextEntry = true
+                guard let password = ac?.textFields?[0].text else { return }
+                self?.submitPassword(password)
+            }
+            
+            ac.addAction(unlockAction)
+            ac.addAction(UIAlertAction(title: "Cancel", style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
+    // 2
+    func submitPassword(_ password: String) {
+        if password == KeychainWrapper.standard.string(forKey: "Password") {
+            unlockSecretMessage()
+        } else {
+            let ac = UIAlertController(title: "Authentication failed", message: "Password incorrect; please try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Retry", style: .default, handler: AuthenticateTapped))
+            ac.addAction(UIAlertAction(title: "Cancel", style: .default))
             present(ac, animated: true)
         }
     }
