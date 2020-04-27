@@ -6,21 +6,33 @@
 //  Copyright © 2019 Mike. All rights reserved.
 //
 
+import LocalAuthentication
 import UIKit
 
 class ViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var people = [Person]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPerson))
+        
+        // 28.3
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(lock), name: UIApplication.willResignActiveNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(authenticate), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        let defaultPerson = Person(name: "John Smith", image: "empty")
+        people.append(defaultPerson)
+        
+        KeychainWrapper.standard.set("password123", forKey: "Password")
+        lock()
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return people.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Person", for: indexPath) as? PersonCell else {
             fatalError("Unable to dequeue PersonCell.")
@@ -63,7 +75,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
             present(picker, animated: true)
         }
     }
-        
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
         let imageName = UUID().uuidString
@@ -113,5 +125,60 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         present(ac, animated: true)
+    }
+    
+    // 28.3
+    @objc func authenticate(_ sender: Any) {
+        guard collectionView.isHidden == true else { return }
+        let context = LAContext()
+        var error: NSError?
+        
+        if context .canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself!"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, authenticationError in
+                DispatchQueue.main.async {
+                    if success {
+                        self?.unlock()
+                    } else {
+                        let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+                        self?.present(ac, animated: true)
+                    }
+                }
+            }
+        } else {
+            let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication. Please, use password instead.", preferredStyle: .alert)
+            ac.addTextField(configurationHandler: {(textField: UITextField!) -> Void in
+                textField.isSecureTextEntry = true
+            })
+            
+            let unlockAction = UIAlertAction(title: "Unlock", style: .default) {
+                [weak self, weak ac] action in
+                guard let password = ac?.textFields?[0].text else { return }
+                self?.submitPassword(password)
+            }
+            
+            ac.addAction(unlockAction)
+            present(ac, animated: true)
+        }
+    }
+    
+    func submitPassword(_ password: String) {
+        if password == KeychainWrapper.standard.string(forKey: "Password") {
+            unlock()
+        } else {
+            let ac = UIAlertController(title: "Authentication failed", message: "Password incorrect; please try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Retry", style: .default, handler: authenticate))
+            present(ac, animated: true)
+        }
+    }
+    
+    @objc func lock() {
+        collectionView.isHidden = true
+    }
+    
+    func unlock() {
+        collectionView.isHidden = false
     }
 }

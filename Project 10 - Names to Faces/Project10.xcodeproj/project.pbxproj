@@ -14,6 +14,8 @@
 		2714E176226C9C87006283F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2714E174226C9C87006283F3 /* LaunchScreen.storyboard */; };
 		2714E17E226CA25F006283F3 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714E17D226CA25F006283F3 /* PersonCell.swift */; };
 		274B2BCD24362E850035653C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 274B2BCC24362E850035653C /* README.md */; };
+		2779D52824572B6100B59A2D /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2779D52624572B6000B59A2D /* KeychainItemAccessibility.swift */; };
+		2779D52924572B6100B59A2D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2779D52724572B6100B59A2D /* KeychainWrapper.swift */; };
 		2784DD7A2276FC3700A17A08 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2784DD792276FC3700A17A08 /* Person.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		2714E177226C9C87006283F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2714E17D226CA25F006283F3 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		274B2BCC24362E850035653C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2779D52624572B6000B59A2D /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainItemAccessibility.swift; path = "../../Project 28 - Secret Swift/Project28/KeychainItemAccessibility.swift"; sourceTree = "<group>"; };
+		2779D52724572B6100B59A2D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainWrapper.swift; path = "../../Project 28 - Secret Swift/Project28/KeychainWrapper.swift"; sourceTree = "<group>"; };
 		2784DD792276FC3700A17A08 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +73,8 @@
 				2714E172226C9C87006283F3 /* Assets.xcassets */,
 				2714E174226C9C87006283F3 /* LaunchScreen.storyboard */,
 				2714E177226C9C87006283F3 /* Info.plist */,
+				2779D52624572B6000B59A2D /* KeychainItemAccessibility.swift */,
+				2779D52724572B6100B59A2D /* KeychainWrapper.swift */,
 			);
 			path = Project10;
 			sourceTree = "<group>";
@@ -148,6 +154,8 @@
 				2714E17E226CA25F006283F3 /* PersonCell.swift in Sources */,
 				2714E16E226C9C83006283F3 /* ViewController.swift in Sources */,
 				2784DD7A2276FC3700A17A08 /* Person.swift in Sources */,
+				2779D52924572B6100B59A2D /* KeychainWrapper.swift in Sources */,
+				2779D52824572B6100B59A2D /* KeychainItemAccessibility.swift in Sources */,
 				2714E16C226C9C83006283F3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

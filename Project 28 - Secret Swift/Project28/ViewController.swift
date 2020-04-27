@@ -59,7 +59,6 @@ class ViewController: UIViewController {
             
             let unlockAction = UIAlertAction(title: "Unlock", style: .default) {
                 [weak self, weak ac] action in
-             //   ac?.textFields?[0].isSecureTextEntry = true
                 guard let password = ac?.textFields?[0].text else { return }
                 self?.submitPassword(password)
             }

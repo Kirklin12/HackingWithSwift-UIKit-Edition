@@ -36,6 +36,8 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>The app needs access to your camera.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Identify yourself!</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
