@@ -14,6 +14,21 @@ enum CollisionTypes: UInt32 {
     case player = 4
 }
 
+// 1
+var gameScoreOne: SKLabelNode!
+var gameScoreTwo: SKLabelNode!
+
+var scoreOne = 0 {
+    didSet {
+        gameScoreOne.text = "Score: \(scoreOne)"
+    }
+}
+var scoreTwo = 0 {
+    didSet {
+        gameScoreTwo.text = "Score: \(scoreTwo)"
+    }
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var buildings = [BuildingNode]()
     weak var viewController: GameViewController?
@@ -24,6 +39,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var currentPlayer = 1
     
     override func didMove(to view: SKView) {
+        // 1
+        gameScoreOne = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        gameScoreOne.text = "Score: \(scoreOne)"
+        gameScoreOne.position = CGPoint(x: 22, y: view.frame.size.height - 80)
+        gameScoreOne.horizontalAlignmentMode = .left
+        gameScoreOne.fontSize = 20
+        gameScoreOne.zPosition = 2
+        addChild(gameScoreOne)
+        
+        gameScoreTwo = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        gameScoreTwo.text = "Score: \(scoreTwo)"
+        gameScoreTwo.position = CGPoint(x: view.frame.size.width - 140, y: view.frame.size.height - 80)
+        gameScoreTwo.horizontalAlignmentMode = .right
+        gameScoreTwo.fontSize = 20
+        gameScoreTwo.zPosition = 2
+        addChild(gameScoreTwo)
+        
         backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
         createBuildings()
         createPlayers()
@@ -159,16 +191,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeFromParent()
         banana.removeFromParent()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let newGame = GameScene(size: self.size)
-            newGame.viewController = self.viewController
-            self.viewController?.currentGame = newGame
-            
-            self.changePlayer()
-            newGame.currentPlayer = self.currentPlayer
-            
-            let transition = SKTransition.doorway(withDuration: 1.5)
-            self.view?.presentScene(newGame, transition: transition)
+        // 1
+        if currentPlayer == 1 {
+            scoreOne += 1
+        } else if currentPlayer == 2 {
+            scoreTwo += 1
+        }
+        
+        if scoreOne == 3 || scoreTwo == 3 {
+            let gameOver = SKSpriteNode(imageNamed: "gameOver")
+            gameOver.position = CGPoint(x: 512, y: 384)
+            gameOver.zPosition = 1
+            addChild(gameOver)
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                let newGame = GameScene(size: self.size)
+                newGame.viewController = self.viewController
+                self.viewController?.currentGame = newGame
+                
+                self.changePlayer()
+                newGame.currentPlayer = self.currentPlayer
+                
+                let transition = SKTransition.doorway(withDuration: 1.5)
+                self.view?.presentScene(newGame, transition: transition)
+            }
         }
     }
     
