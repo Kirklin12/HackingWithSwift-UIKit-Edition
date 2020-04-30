@@ -22,6 +22,8 @@ class GameViewController: UIViewController {
     // 1
     @IBOutlet var playerOneScoreLabel: UILabel!
     @IBOutlet var playerTwoScoreLabel: UILabel!
+    // 3
+    @IBOutlet var windStats: UILabel!
     
     var scoreOne = 0 {
         didSet {
@@ -99,7 +101,7 @@ class GameViewController: UIViewController {
     
     func activatePlayer(number: Int) {
         if number == 1 {
-            playerNumber.text = "<<< PlAYER ONE"
+            playerNumber.text = "<<< PLAYER ONE"
         } else {
             playerNumber.text = "PLAYER TWO >>>"
         }

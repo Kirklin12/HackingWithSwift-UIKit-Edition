@@ -33,6 +33,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createPlayers()
         
         physicsWorld.contactDelegate = self
+        
+        // 3
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            let wind = Double.random(in: -10...10)
+            self.self.viewController?.currentGame?.physicsWorld.gravity = CGVector(dx: wind, dy: -9.8)
+            
+            if wind > 0 {
+                self.self.viewController?.windStats.text = ">> Wind strength: \(abs(round(10 * wind) / 10)) >>"
+            }
+            
+            if wind == 0 {
+                self.self.viewController?.windStats.text = "|| Wind strength: \(abs(round(10 * wind) / 10)) ||"
+            }
+            
+            if wind < 0 {
+                self.self.viewController?.windStats.text = "<< Wind strength: \(abs(round(10 * wind) / 10)) <<"
+            }
+        }
     }
     
     func createBuildings() {
@@ -159,16 +177,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             explosion.position = player.position
             addChild(explosion)
         }
+        // 1 + also checking whether player hits himself.
+        if currentPlayer == 1 {
+            if player.isEqual(to: player1) {
+                viewController?.scoreTwo += 1
+            } else {
+                viewController?.scoreOne += 1
+            }
+        } else if currentPlayer == 2 {
+            if player.isEqual(to: player2) {
+                viewController?.scoreOne += 1
+            } else {
+                viewController?.scoreTwo += 1
+            }
+        }
         
         player.removeFromParent()
         banana.removeFromParent()
-        
-        // 1
-        if currentPlayer == 1 {
-            viewController?.scoreOne += 1
-        } else if currentPlayer == 2 {
-            viewController?.scoreTwo += 1
-        }
         
         if viewController?.scoreOne == 3 || viewController?.scoreTwo == 3 {
             let gameOver = SKSpriteNode(imageNamed: "gameOver")

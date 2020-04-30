@@ -86,6 +86,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind strength: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSL-Nl-ylc">
+                                <rect key="frame" x="397.5" y="107" width="285" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -100,6 +106,7 @@
                             <constraint firstItem="L20-AB-8zr" firstAttribute="top" secondItem="kbM-PK-fOw" secondAttribute="bottom" constant="30" id="Ja0-uJ-Qaf"/>
                             <constraint firstItem="eTB-aJ-AEE" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="20" id="UrL-hh-cAl"/>
                             <constraint firstItem="eTB-aJ-AEE" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" constant="22" id="VBY-pb-idA"/>
+                            <constraint firstItem="nSL-Nl-ylc" firstAttribute="top" secondItem="L20-AB-8zr" secondAttribute="bottom" constant="7.5" id="VlF-lX-OAS"/>
                             <constraint firstItem="feu-iz-myq" firstAttribute="leading" secondItem="eTB-aJ-AEE" secondAttribute="leading" id="X52-6E-m8x"/>
                             <constraint firstItem="qNq-VS-MZF" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="trailing" constant="-120" id="edO-Ie-0Wl"/>
                             <constraint firstItem="eTB-aJ-AEE" firstAttribute="top" secondItem="kbM-PK-fOw" secondAttribute="top" id="fmF-6E-ObS"/>
@@ -107,6 +114,8 @@
                             <constraint firstItem="ilM-Co-Hst" firstAttribute="trailing" secondItem="qNq-VS-MZF" secondAttribute="trailing" constant="20" id="pZn-st-ntA"/>
                             <constraint firstItem="ilM-Co-Hst" firstAttribute="top" secondItem="qNq-VS-MZF" secondAttribute="bottom" constant="15" id="qNw-5B-3jK"/>
                             <constraint firstItem="ilM-Co-Hst" firstAttribute="trailing" secondItem="3se-qz-xqx" secondAttribute="trailingMargin" constant="20" id="rYa-f6-UV6"/>
+                            <constraint firstItem="nSL-Nl-ylc" firstAttribute="centerX" secondItem="4qk-I5-YsI" secondAttribute="centerX" id="tTy-Gf-ROQ"/>
+                            <constraint firstItem="nSL-Nl-ylc" firstAttribute="leading" secondItem="L20-AB-8zr" secondAttribute="leading" id="wy0-kM-Wcg"/>
                             <constraint firstItem="ilM-Co-Hst" firstAttribute="leading" secondItem="qNq-VS-MZF" secondAttribute="leading" constant="20" id="xqC-UN-iH1"/>
                             <constraint firstItem="eTB-aJ-AEE" firstAttribute="centerY" secondItem="0HO-hH-oKi" secondAttribute="centerY" id="y2r-fr-Bfh"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="qNq-VS-MZF" secondAttribute="trailing" constant="20" id="z9X-6R-tWO"/>
@@ -122,6 +131,7 @@
                         <outlet property="playerTwoScoreLabel" destination="ilM-Co-Hst" id="Nfe-no-jhF"/>
                         <outlet property="velocityLabel" destination="oeL-wu-XlZ" id="aWt-if-Vwh"/>
                         <outlet property="velocitySlider" destination="kbM-PK-fOw" id="DeL-k1-ZgZ"/>
+                        <outlet property="windStats" destination="nSL-Nl-ylc" id="PTl-x9-72v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
