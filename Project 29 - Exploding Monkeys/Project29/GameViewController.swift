@@ -91,6 +91,8 @@ class GameViewController: UIViewController {
         velocityLabel.isHidden = true
         
         launchButton.isHidden = true
+        playerOneScoreLabel.isHidden = true
+        playerTwoScoreLabel.isHidden = true
         
         currentGame?.launch(angle: Int(angleSlider.value), velocity: Int(velocitySlider.value))
     }
@@ -108,5 +110,7 @@ class GameViewController: UIViewController {
         velocityLabel.isHidden = false
         
         launchButton.isHidden = false
+        playerOneScoreLabel.isHidden = false
+        playerTwoScoreLabel.isHidden = false
     }
 }
