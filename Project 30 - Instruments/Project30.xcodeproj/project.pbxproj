@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27BE75A3245DCEB200D45F26 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 27BE75A2245DCEB200D45F26 /* README.md */; };
 		5138B3BD1D69197400FD2417 /* BRB-Large.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5138B38D1D69197400FD2417 /* BRB-Large.jpg */; };
 		5138B3BE1D69197400FD2417 /* BRB-Thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5138B38E1D69197400FD2417 /* BRB-Thumb.jpg */; };
 		5138B3BF1D69197400FD2417 /* BRB-Thumb@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5138B38F1D69197400FD2417 /* BRB-Thumb@2x.jpg */; };
@@ -63,6 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27BE75A2245DCEB200D45F26 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5138B38D1D69197400FD2417 /* BRB-Large.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BRB-Large.jpg"; sourceTree = "<group>"; };
 		5138B38E1D69197400FD2417 /* BRB-Thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BRB-Thumb.jpg"; sourceTree = "<group>"; };
 		5138B38F1D69197400FD2417 /* BRB-Thumb@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BRB-Thumb@2x.jpg"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		51BE9E501A2667CD00578AA0 = {
 			isa = PBXGroup;
 			children = (
+				27BE75A2245DCEB200D45F26 /* README.md */,
 				51BE9E5B1A2667CD00578AA0 /* Project30 */,
 				51BE9E5A1A2667CD00578AA0 /* Products */,
 			);
@@ -331,6 +334,7 @@
 				5138B3E61D69197400FD2417 /* TLDR-Thumb.jpg in Resources */,
 				5138B3E51D69197400FD2417 /* TLDR-Large.jpg in Resources */,
 				5138B3D31D69197400FD2417 /* LMAO-Thumb@2x.jpg in Resources */,
+				27BE75A3245DCEB200D45F26 /* README.md in Resources */,
 				5138B3CE1D69197400FD2417 /* IRL-Thumb.jpg in Resources */,
 				5138B3BE1D69197400FD2417 /* BRB-Thumb.jpg in Resources */,
 				5138B3C31D69197400FD2417 /* BTW-Thumb@2x.jpg in Resources */,
