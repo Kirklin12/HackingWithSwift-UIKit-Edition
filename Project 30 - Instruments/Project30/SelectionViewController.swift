@@ -10,6 +10,7 @@ import UIKit
 
 class SelectionViewController: UITableViewController {
 	var items = [String]() // this is the array that will store the filenames to load
+    var images = [UIImage]() // 3
 	var dirty = false
 
     override func viewDidLoad() {
@@ -28,6 +29,26 @@ class SelectionViewController: UITableViewController {
 			for item in tempItems {
 				if item.range(of: "Large") != nil {
 					items.append(item)
+                    
+                    // 3
+                    let imageRootName = item.replacingOccurrences(of: "Large", with: "Thumb")
+                    guard let path = Bundle.main.path(forResource: imageRootName, ofType: nil) else {
+                        print("The resource was not found")
+                        return
+                    }
+                    let original = UIImage(contentsOfFile: path)!
+                    
+                    let renderRect = CGRect(origin: .zero, size: CGSize(width: 90, height: 90))
+                    let renderer = UIGraphicsImageRenderer(size: renderRect.size)
+
+                    let rounded = renderer.image { ctx in
+                        ctx.cgContext.addEllipse(in: renderRect)
+                        ctx.cgContext.clip()
+
+                        original.draw(in: renderRect)
+                    }
+                    
+                    images.append(rounded)
 				}
 			}
 		}
@@ -59,27 +80,12 @@ class SelectionViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
 		// find the image for this cell, and load its thumbnail
-		let currentImage = items[indexPath.row % items.count]
-		let imageRootName = currentImage.replacingOccurrences(of: "Large", with: "Thumb")
-        guard let path = Bundle.main.path(forResource: imageRootName, ofType: nil) else {
-            print("The resource was not found")
-            return cell
-        }
-		let original = UIImage(contentsOfFile: path)!
-
-        let renderRect = CGRect(origin: .zero, size: CGSize(width: 90, height: 90))
-		let renderer = UIGraphicsImageRenderer(size: renderRect.size)
-
-		let rounded = renderer.image { ctx in
-			ctx.cgContext.addEllipse(in: renderRect)
-			ctx.cgContext.clip()
-
-			original.draw(in: renderRect)
-		}
-
-		cell.imageView?.image = rounded
+        // 3
+        cell.imageView?.image = images[indexPath.row % items.count]
 
 		// give the images a nice shadow to make them look a bit more dramatic
+        let renderRect = CGRect(origin: .zero, size: CGSize(width: 90, height: 90))
+        
 		cell.imageView?.layer.shadowColor = UIColor.black.cgColor
 		cell.imageView?.layer.shadowOpacity = 1
 		cell.imageView?.layer.shadowRadius = 10
@@ -87,7 +93,9 @@ class SelectionViewController: UITableViewController {
         cell.imageView?.layer.shadowPath = UIBezierPath(ovalIn: renderRect).cgPath
 
 		// each image stores how often it's been tapped
+        let currentImage = items[indexPath.row % items.count]
 		let defaults = UserDefaults.standard
+        
 		cell.textLabel?.text = "\(defaults.integer(forKey: currentImage))"
 
 		return cell
