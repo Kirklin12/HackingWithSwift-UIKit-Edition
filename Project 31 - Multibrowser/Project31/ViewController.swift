@@ -47,7 +47,31 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     }
     
     @objc func deleteWebView() {
-        
+        // safely unwrap our webview
+        if let webView = activeWebView {
+            if let index = stackView.arrangedSubviews.firstIndex(of: webView) {
+                // We found the webview - remove it from the stack view and destroy it
+                webView.removeFromSuperview()
+                
+                if stackView.arrangedSubviews.count == 0 {
+                    // go back to our default UI
+                    setDefaultTitle()
+                } else {
+                    // convert the Index value into an integer
+                    var currentIndex = Int(index)
+                    
+                    // if that was the last web view in the stack, go back one
+                    if currentIndex == stackView.arrangedSubviews.count {
+                        currentIndex = stackView.arrangedSubviews.count - 1
+                    }
+                    
+                    // find the web view at the new index and select it
+                    if let newSelectedWebView = stackView.arrangedSubviews[currentIndex] as? WKWebView {
+                        selectWebView(newSelectedWebView)
+                    }
+                }
+            }
+        }
     }
     
     func selectWebView(_ webView: WKWebView) {
