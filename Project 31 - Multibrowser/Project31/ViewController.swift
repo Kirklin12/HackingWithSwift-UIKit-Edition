@@ -93,13 +93,22 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let webView = activeWebView, let address = addressBar.text {
-            if let url = URL(string: address) {
+            if let url = URL(string: validateAddress(address: address)) {
                 webView.load(URLRequest(url: url))
             }
         }
         
         textField.resignFirstResponder()
         return true
+    }
+    
+    // URL https fix
+    func validateAddress(address: String) -> String {
+        if address.hasPrefix("https://") || address.hasPrefix("http://") {
+            return address
+        } else {
+            return "https://\(address)"
+        }
     }
     
     @objc func webViewTapped(_ recognizer: UITapGestureRecognizer) {
