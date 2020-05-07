@@ -23,6 +23,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWebView))
         let delete = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteWebView))
         navigationItem.rightBarButtonItems = [delete, add]
+        
+        addressBar.placeholder = "Put the website address here"
     }
     
     func setDefaultTitle() {
