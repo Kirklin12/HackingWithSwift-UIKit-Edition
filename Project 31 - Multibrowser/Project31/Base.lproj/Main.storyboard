@@ -15,11 +15,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JBX-UT-4jJ">
-                                <rect key="frame" x="107" y="144" width="200" height="110"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JBX-UT-4jJ">
+                                <rect key="frame" x="5" y="142" width="404" height="720"/>
                             </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-hm-qQg">
-                                <rect key="frame" x="5" y="93" width="404" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-hm-qQg">
+                                <rect key="frame" x="5" y="98" width="404" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -29,10 +29,13 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="X8f-hm-qQg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="5" id="2pu-2x-0QQ"/>
-                            <constraint firstItem="X8f-hm-qQg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="FaN-Np-dXi"/>
-                            <constraint firstItem="JBX-UT-4jJ" firstAttribute="top" secondItem="X8f-hm-qQg" secondAttribute="bottom" constant="5" id="fYp-mM-DSl"/>
-                            <constraint firstItem="X8f-hm-qQg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="fxB-UR-d2h"/>
+                            <constraint firstItem="X8f-hm-qQg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cns-36-vbE"/>
+                            <constraint firstItem="X8f-hm-qQg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="XCC-BA-1YB"/>
+                            <constraint firstItem="JBX-UT-4jJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="eJC-Kx-aB6"/>
+                            <constraint firstItem="X8f-hm-qQg" firstAttribute="leading" secondItem="JBX-UT-4jJ" secondAttribute="leading" id="m6z-Y8-7ba"/>
+                            <constraint firstItem="JBX-UT-4jJ" firstAttribute="top" secondItem="X8f-hm-qQg" secondAttribute="bottom" constant="10" id="pwH-3W-S6w"/>
+                            <constraint firstItem="X8f-hm-qQg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="wms-jA-7Jg"/>
+                            <constraint firstItem="X8f-hm-qQg" firstAttribute="trailing" secondItem="JBX-UT-4jJ" secondAttribute="trailing" id="xHj-Mf-ALE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
