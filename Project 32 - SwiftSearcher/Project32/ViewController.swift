@@ -72,11 +72,16 @@ class ViewController: UITableViewController {
             favorites.append(indexPath.row)
             index(item: indexPath.row)
         } else {
-            if let index = favorites.firstIndex(of: indexPath.row) {
+            if let index = favorites.index(of: indexPath.row) {
                 favorites.remove(at: index)
                 deindex(item: indexPath.row)
             }
         }
+
+        let defaults = UserDefaults.standard
+        defaults.set(favorites, forKey: "favorites")
+
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
     
     func index(item: Int) {
@@ -93,7 +98,7 @@ class ViewController: UITableViewController {
             if let error = error {
                 print("Indexing error: \(error.localizedDescription)")
             } else {
-                print("Search item succesfully indexed!")
+                print("Search item successfully indexed!")
             }
         }
     }
