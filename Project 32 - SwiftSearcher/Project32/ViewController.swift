@@ -12,20 +12,20 @@ import SafariServices
 import UIKit
 
 class ViewController: UITableViewController {
-    var projects = [[String]]()
+    var projects = [Project]()
     var favorites = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        projects.append(["Project 1: Storm Viewer", "Constants and variables, UITableView, UIImageView, FileManager, storyboards"])
-        projects.append(["Project 2: Guess the Flag", "Asset catalogs, UIButton, CALayer, UIColor, UIAlertController"])
-        projects.append(["Project 3: Social Media", "UIBarButtonItem, UIActivityViewController, URL"])
-        projects.append(["Project 4: Easy Browser", "loadView(), WKWebView, URLRequest, UIToolbar, UIProgressView, key-value observing"])
-        projects.append(["Project 5: Word Scramble", "Closures, method return values, booleans, NSRange"])
-        projects.append(["Project 6: Auto Layout", "NSLayoutConstraint, Visual Format Language, layout anchors"])
-        projects.append(["Project 7: Whitehouse Petitions", "JSON, Data, UITabBarController"])
-        projects.append(["Project 8: 7 Swifty Words", "addTarget(), enumerated(), count(), index(of:), joined(), property observers, range operators"])
+        projects.append(Project(name: "Project 1: Storm Viewer", desc: "Constants and variables, UITableView, UIImageView, FileManager, storyboards"))
+        projects.append(Project(name: "Project 2: Guess the Flag", desc: "Asset catalogs, UIButton, CALayer, UIColor, UIAlertController"))
+        projects.append(Project(name: "Project 3: Social Media", desc: "UIBarButtonItem, UIActivityViewController, URL"))
+        projects.append(Project(name: "Project 4: Easy Browser", desc: "loadView(), WKWebView, URLRequest, UIToolbar, UIProgressView, key-value observing"))
+        projects.append(Project(name: "Project 5: Word Scramble", desc: "Closures, method return values, booleans, NSRange"))
+        projects.append(Project(name: "Project 6: Auto Layout", desc: "NSLayoutConstraint, Visual Format Language, layout anchors"))
+        projects.append(Project(name: "Project 7: Whitehouse Petitions", desc: "JSON, Data, UITabBarController"))
+        projects.append(Project(name: "Project 8: 7 Swifty Words", desc: "addTarget(), enumerated(), count(), index(of:), joined(), property observers, range operators"))
         
         let defaults = UserDefaults.standard
         if let savedFavorites = defaults.object(forKey: "favorites") as? [Int] {
@@ -44,7 +44,7 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         let project = projects[indexPath.row]
-        cell.textLabel?.attributedText = makeAttributedString(title: project[0], subtitle: project[1])
+        cell.textLabel?.attributedText = makeAttributedString(title: project.name, subtitle: project.desc)
         
         if favorites.contains(indexPath.row) {
             cell.editingAccessoryType = .checkmark
@@ -88,8 +88,8 @@ class ViewController: UITableViewController {
         let project = projects[item]
         
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
-        attributeSet.title = project[0]
-        attributeSet.contentDescription = project[1]
+        attributeSet.title = project.name
+        attributeSet.contentDescription = project.desc
         
         let item = CSSearchableItem(uniqueIdentifier: "\(item)", domainIdentifier: "com.hackingwithswift", attributeSet: attributeSet)
         item.expirationDate = Date.distantFuture
