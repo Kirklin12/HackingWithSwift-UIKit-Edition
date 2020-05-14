@@ -55,7 +55,7 @@ class ViewController: UITableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func loadWhistles() {
+    @objc func loadWhistles() {
         let pred = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: "creationDate", ascending: false)
         let query = CKQuery(recordType: "Whistles", predicate: pred)
@@ -83,6 +83,9 @@ class ViewController: UITableViewController {
                 } else {
                     let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of whistles; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    ac.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in
+                        self.loadWhistles()
+                    }))
                     self.present(ac, animated: true)
                 }
             }
