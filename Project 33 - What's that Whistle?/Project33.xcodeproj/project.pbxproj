@@ -12,6 +12,7 @@
 		275788BB246AE580001DF8F0 /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275788BA246AE580001DF8F0 /* SubmitViewController.swift */; };
 		275788BD246B1280001DF8F0 /* Whistle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275788BC246B1280001DF8F0 /* Whistle.swift */; };
 		275788BF246C14A6001DF8F0 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275788BE246C14A6001DF8F0 /* ResultsViewController.swift */; };
+		275788C1246D53E3001DF8F0 /* MyGenresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275788C0246D53E3001DF8F0 /* MyGenresViewController.swift */; };
 		279D43022469D5BF00454B7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D43012469D5BF00454B7A /* AppDelegate.swift */; };
 		279D43042469D5BF00454B7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D43032469D5BF00454B7A /* SceneDelegate.swift */; };
 		279D43062469D5BF00454B7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279D43052469D5BF00454B7A /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 		275788BA246AE580001DF8F0 /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 		275788BC246B1280001DF8F0 /* Whistle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Whistle.swift; sourceTree = "<group>"; };
 		275788BE246C14A6001DF8F0 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		275788C0246D53E3001DF8F0 /* MyGenresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGenresViewController.swift; sourceTree = "<group>"; };
 		279D42FE2469D5BF00454B7A /* Project33.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project33.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		279D43012469D5BF00454B7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		279D43032469D5BF00454B7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				275788BE246C14A6001DF8F0 /* ResultsViewController.swift */,
 				275788B8246AC009001DF8F0 /* AddCommentsViewController.swift */,
 				275788BA246AE580001DF8F0 /* SubmitViewController.swift */,
+				275788C0246D53E3001DF8F0 /* MyGenresViewController.swift */,
 				279D43072469D5BF00454B7A /* Main.storyboard */,
 				275788BC246B1280001DF8F0 /* Whistle.swift */,
 				279D430A2469D5C300454B7A /* Assets.xcassets */,
@@ -168,6 +171,7 @@
 				275788BF246C14A6001DF8F0 /* ResultsViewController.swift in Sources */,
 				279D43182469E03C00454B7A /* RecordWhistleViewController.swift in Sources */,
 				275788B9246AC009001DF8F0 /* AddCommentsViewController.swift in Sources */,
+				275788C1246D53E3001DF8F0 /* MyGenresViewController.swift in Sources */,
 				279D43042469D5BF00454B7A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
