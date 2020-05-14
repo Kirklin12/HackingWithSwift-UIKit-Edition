@@ -80,4 +80,11 @@ class AddCommentsViewController: UIViewController, UITextViewDelegate {
         let selectedRange = comments.selectedRange
         comments.scrollRangeToVisible(selectedRange)
     }
+    
+    // 4
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        let numberOfChars = newText.count
+        return numberOfChars < 100
+    }
 }

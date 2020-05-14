@@ -92,7 +92,7 @@ class ViewController: UITableViewController {
             }
         }
         
-        //CKContainer.default().publicCloudDatabase.add(operation)
+        CKContainer.default().publicCloudDatabase.add(operation)
     }
     
     @objc func addWhistle() {
