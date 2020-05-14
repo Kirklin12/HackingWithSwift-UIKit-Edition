@@ -83,6 +83,7 @@ class ViewController: UITableViewController {
                 } else {
                     let ac = UIAlertController(title: "Fetch failed", message: "There was a problem fetching the list of whistles; please try again: \(error!.localizedDescription)", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    // 1
                     ac.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in
                         self.loadWhistles()
                     }))
@@ -91,7 +92,7 @@ class ViewController: UITableViewController {
             }
         }
         
-        CKContainer.default().publicCloudDatabase.add(operation)
+        //CKContainer.default().publicCloudDatabase.add(operation)
     }
     
     @objc func addWhistle() {
