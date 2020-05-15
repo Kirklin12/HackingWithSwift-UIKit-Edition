@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1080" height="760"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="PxN-YE-0Df">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="PxN-YE-0Df">
                                 <rect key="frame" x="0.0" y="0.0" width="1080" height="760"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvN-Cz-m7l">
@@ -82,13 +82,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="hpp-h5-6Gb"/>
                     <connections>
-                        <outletCollection property="customButtons" destination="QvN-Cz-m7l" collectionClass="NSMutableArray" id="ewJ-m9-0nU"/>
-                        <outletCollection property="customButtons" destination="liD-A8-6VH" collectionClass="NSMutableArray" id="tJd-Vm-nuI"/>
-                        <outletCollection property="customButtons" destination="yqc-oW-dH7" collectionClass="NSMutableArray" id="nto-1R-qlP"/>
-                        <outletCollection property="customButtons" destination="ghI-Ky-NQy" collectionClass="NSMutableArray" id="fQ5-My-cY6"/>
-                        <outletCollection property="customButtons" destination="O5q-DX-99o" collectionClass="NSMutableArray" id="Gmx-yl-8LH"/>
-                        <outletCollection property="customButtons" destination="SEk-iy-QrT" collectionClass="NSMutableArray" id="uNV-XE-bba"/>
-                        <outletCollection property="customButtons" destination="i8H-2j-d68" collectionClass="NSMutableArray" id="nUh-YH-gdE"/>
+                        <outletCollection property="columnButtons" destination="QvN-Cz-m7l" collectionClass="NSMutableArray" id="q5t-ZD-64x"/>
+                        <outletCollection property="columnButtons" destination="liD-A8-6VH" collectionClass="NSMutableArray" id="eGM-bR-Zsp"/>
+                        <outletCollection property="columnButtons" destination="yqc-oW-dH7" collectionClass="NSMutableArray" id="jw6-MH-aw3"/>
+                        <outletCollection property="columnButtons" destination="ghI-Ky-NQy" collectionClass="NSMutableArray" id="rBK-pi-QpL"/>
+                        <outletCollection property="columnButtons" destination="O5q-DX-99o" collectionClass="NSMutableArray" id="Rgg-Kh-xZr"/>
+                        <outletCollection property="columnButtons" destination="SEk-iy-QrT" collectionClass="NSMutableArray" id="J1L-Ky-FiX"/>
+                        <outletCollection property="columnButtons" destination="i8H-2j-d68" collectionClass="NSMutableArray" id="UI4-Fe-hFE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
