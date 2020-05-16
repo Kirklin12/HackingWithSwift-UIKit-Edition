@@ -16,7 +16,8 @@ class ViewController: UIViewController {
         
         if let row = board.nextEmptySlot(in: column) {
             board.add(chip: .red, in: column)
-            addChip(inColumn: column, row: row, color: .red)
+            addChip(inColumn: column, row: row, color: board.currentPlayer.color)
+            continueGame()
         }
     }
     
@@ -35,6 +36,7 @@ class ViewController: UIViewController {
 
     func resetBoard() {
         board = Board()
+        updateUI()
         
         for i in 0 ..< placedChips.count {
             for chip in placedChips[i] {
@@ -77,5 +79,33 @@ class ViewController: UIViewController {
         yOffset -= size * CGFloat(row)
         return CGPoint(x: xOffset, y: yOffset)
     }
+    
+    func updateUI() {
+        title = "\(board.currentPlayer.name)'s Turn"
+    }
+    
+    func continueGame() {
+        var gameOverTitle: String? = nil
+        
+        if board.isWin(for: board.currentPlayer) {
+            gameOverTitle = "\(board.currentPlayer.name) Wins!"
+        } else if board.isFull() {
+            gameOverTitle = "Draw!"
+        }
+        
+        if gameOverTitle != nil {
+            let alert = UIAlertController(title: gameOverTitle, message: nil, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Play Again", style: .default) { [unowned self] (action) in
+                self.resetBoard()
+            }
+            
+            alert.addAction(alertAction)
+            present(alert, animated: true)
+            
+            return
+        }
+        
+        board.currentPlayer = board.currentPlayer.opponent
+        updateUI()
+    }
 }
-
