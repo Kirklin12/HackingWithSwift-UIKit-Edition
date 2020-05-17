@@ -8,18 +8,14 @@
 
 import UIKit
 
+enum ChipColor: Int {
+    case none = 0
+    case red
+    case black
+}
+
 class ViewController: UIViewController {
     @IBOutlet var columnButtons: [UIButton]!
-    
-    @IBAction func makeMove(_ sender: UIButton) {
-        let column = sender.tag
-        
-        if let row = board.nextEmptySlot(in: column) {
-            board.add(chip: .red, in: column)
-            addChip(inColumn: column, row: row, color: board.currentPlayer.color)
-            continueGame()
-        }
-    }
     
     var placedChips = [[UIView]]()
     var board: Board!
@@ -32,6 +28,16 @@ class ViewController: UIViewController {
         }
         
         resetBoard()
+    }
+    
+    @IBAction func makeMove(_ sender: UIButton) {
+        let column = sender.tag
+        
+        if let row = board.nextEmptySlot(in: column) {
+            board.add(chip: board.currentPlayer.chip, in: column)
+            addChip(inColumn: column, row: row, color: board.currentPlayer.color)
+            continueGame()
+        }
     }
 
     func resetBoard() {
