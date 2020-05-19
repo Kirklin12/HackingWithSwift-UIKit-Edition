@@ -26,16 +26,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let gameType = UIBarButtonItem(title: "Game Type", style: .plain, target: self, action: #selector(gameModeAlert))
+        let gameMode = UIBarButtonItem(title: "Game Mode", style: .plain, target: self, action: #selector(gameModeAlert))
+        let difficulty = UIBarButtonItem(title: "Difficulty", style: .plain, target: self, action: #selector(difficultyAlert))
         
-        navigationItem.rightBarButtonItems = [gameType]
+        navigationItem.rightBarButtonItems = [difficulty, gameMode]
         
         for _ in 0 ..< Board.width {
             placedChips.append([UIView]())
         }
         
         strategist = GKMinmaxStrategist()
-        strategist.maxLookAheadDepth = 7
+        strategist.maxLookAheadDepth = 5
         strategist.randomSource = nil
   
         resetBoard()
@@ -65,13 +66,13 @@ class ViewController: UIViewController {
     
     // game modes
     @objc func gameModeAlert() {
-        let ac = UIAlertController(title: "Game Types", message: nil, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Player vs AI", style: .default, handler: setGameMode))
-        ac.addAction(UIAlertAction(title: "Player vs Player", style: .default, handler: setGameMode))
+        let ac = UIAlertController(title: "Game Modes", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Player vs AI", style: .default, handler: gameSettings))
+        ac.addAction(UIAlertAction(title: "Player vs Player", style: .default, handler: gameSettings))
         present(ac, animated: true)
     }
     
-    func setGameMode(action: UIAlertAction) {
+    func gameSettings(action: UIAlertAction) {
         if action.title == "Player vs AI" {
             isAI = true
         }
@@ -80,9 +81,30 @@ class ViewController: UIViewController {
             isAI = false
         }
         
+        if action.title == "Easy" {
+            strategist.maxLookAheadDepth = 1
+        }
+        
+        if action.title == "Medium" {
+            strategist.maxLookAheadDepth = 5
+        }
+
+        if action.title == "Hard" {
+            strategist.maxLookAheadDepth = 7
+        }
+        
         resetBoard()
     }
-
+    
+    // difficulty
+    @objc func difficultyAlert() {
+        let ac = UIAlertController(title: "Difficulty", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Easy", style: .default, handler: gameSettings))
+        ac.addAction(UIAlertAction(title: "Medium", style: .default, handler: gameSettings))
+        ac.addAction(UIAlertAction(title: "Hard", style: .default, handler: gameSettings))
+        present(ac, animated: true)
+    }
+        
     func resetBoard() {
         board = Board()
         strategist.gameModel = board
