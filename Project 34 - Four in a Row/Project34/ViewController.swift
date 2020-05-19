@@ -21,9 +21,14 @@ class ViewController: UIViewController {
     var placedChips = [[UIView]]()
     var board: Board!
     var strategist: GKMinmaxStrategist!
+    var isAI = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let gameType = UIBarButtonItem(title: "Game Type", style: .plain, target: self, action: #selector(gameModeAlert))
+        
+        navigationItem.rightBarButtonItems = [gameType]
         
         for _ in 0 ..< Board.width {
             placedChips.append([UIView]())
@@ -32,7 +37,7 @@ class ViewController: UIViewController {
         strategist = GKMinmaxStrategist()
         strategist.maxLookAheadDepth = 7
         strategist.randomSource = nil
-        
+  
         resetBoard()
     }
     
@@ -56,6 +61,26 @@ class ViewController: UIViewController {
             
             continueGame()
         }
+    }
+    
+    // game modes
+    @objc func gameModeAlert() {
+        let ac = UIAlertController(title: "Game Types", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Player vs AI", style: .default, handler: setGameMode))
+        ac.addAction(UIAlertAction(title: "Player vs Player", style: .default, handler: setGameMode))
+        present(ac, animated: true)
+    }
+    
+    func setGameMode(action: UIAlertAction) {
+        if action.title == "Player vs AI" {
+            isAI = true
+        }
+        
+        if action.title == "Player vs Player" {
+            isAI = false
+        }
+        
+        resetBoard()
     }
 
     func resetBoard() {
@@ -109,7 +134,7 @@ class ViewController: UIViewController {
     func updateUI() {
         title = "\(board.currentPlayer.name)'s Turn"
         
-        if board.currentPlayer.chip == .black {
+        if board.currentPlayer.chip == .black && isAI {
             startAImove()
         }
     }
