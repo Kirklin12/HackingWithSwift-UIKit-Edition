@@ -31,10 +31,10 @@ class Player: NSObject, GKGameModelPlayer {
         
         if chip == .red {
             color = .red
-            name = "Red"
+            name = "Banana"
         } else {
             color = .black
-            name = "Black"
+            name = "Cherry"
         }
         
         super.init()

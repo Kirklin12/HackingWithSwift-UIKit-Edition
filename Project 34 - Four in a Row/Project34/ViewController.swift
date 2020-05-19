@@ -125,12 +125,22 @@ class ViewController: UIViewController {
         let size = min(button.frame.width, button.frame.height / 6)
         let rect = CGRect(x: 0, y: 0, width: size, height: size)
         
+        // custom images
         if (placedChips[column].count < row + 1) {
-            let newChip = UIView()
+            let newChip = UIImageView()
+            
+            newChip.contentMode = .scaleAspectFit
             newChip.frame = rect
             newChip.isUserInteractionEnabled = false
-            newChip.backgroundColor = color
-            newChip.layer.cornerRadius = size / 2
+            
+            if color == .red {
+                newChip.image = UIImage(named: "banana")
+            }
+
+            if color == .black {
+                newChip.image = UIImage(named: "cherry")
+            }
+
             newChip.center = positionForChip(inColumn: column, row: row)
             newChip.transform = CGAffineTransform(translationX: 0, y: -800)
             view.addSubview(newChip)
