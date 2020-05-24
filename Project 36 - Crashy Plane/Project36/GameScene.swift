@@ -236,7 +236,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // this next value affects the width of the gap between rocks
         // the smaller it is - the harder the game
-        let rockDistance: CGFloat = 70
+        let rockDistance: CGFloat = 100 - (score < 60 ? CGFloat(score) : 60)
         
         topRock.position = CGPoint(x: xPosition, y: yPosition + topRock.size.height + rockDistance)
         bottomRock.position = CGPoint(x: xPosition, y: yPosition - rockDistance)
