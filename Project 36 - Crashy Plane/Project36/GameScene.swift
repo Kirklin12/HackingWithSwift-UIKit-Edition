@@ -68,6 +68,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
+        if contact.bodyA.node?.name == "scoreDetectExtra" || contact.bodyB.node?.name == "scoreDetectExtra" {
+            if contact.bodyA.node == player {
+                contact.bodyB.node?.removeFromParent()
+            } else {
+                contact.bodyA.node?.removeFromParent()
+            }
+            
+            let sound = SKAction.playSoundFileNamed("coin.wav", waitForCompletion: false)
+            run(sound)
+            
+            score += 2
+            
+            return
+        }
+        
         guard contact.bodyA.node != nil && contact.bodyB.node != nil else {
             return
         }
@@ -225,9 +240,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rockCollision.physicsBody?.isDynamic = false
         rockCollision.name = "scoreDetect"
         
+        let rockGapTopCollision = SKSpriteNode(color: UIColor.clear, size: CGSize(width: frame.width, height: 200))
+        rockGapTopCollision.physicsBody = SKPhysicsBody(rectangleOf: rockGapTopCollision.size)
+        rockGapTopCollision.physicsBody?.isDynamic = false
+        rockGapTopCollision.name = "scoreDetectExtra"
+        
+        let rockGapBottomCollision = SKSpriteNode(color: UIColor.clear, size: CGSize(width: frame.width, height: 200))
+        rockGapBottomCollision.physicsBody = SKPhysicsBody(rectangleOf: rockGapBottomCollision.size)
+        rockGapBottomCollision.physicsBody?.isDynamic = false
+        rockGapBottomCollision.name = "scoreDetectExtra"
+        
         addChild(topRock)
         addChild(bottomRock)
         addChild(rockCollision)
+        addChild(rockGapTopCollision)
+        addChild(rockGapBottomCollision)
         
         let xPosition = frame.width + topRock.frame.width
         
@@ -241,6 +268,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         topRock.position = CGPoint(x: xPosition, y: yPosition + topRock.size.height + rockDistance)
         bottomRock.position = CGPoint(x: xPosition, y: yPosition - rockDistance)
         rockCollision.position = CGPoint(x: xPosition + (rockCollision.size.width * 2), y: frame.midY)
+        rockGapTopCollision.position = CGPoint(x: xPosition + rockGapTopCollision.size.height, y: frame.maxY)
+        rockGapBottomCollision.position = CGPoint(x: xPosition + rockGapBottomCollision.size.height, y: frame.minY)
         
         let endPosition = frame.width + (topRock.frame.width * 2)
         
@@ -249,6 +278,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         topRock.run(moveSequence)
         bottomRock.run(moveSequence)
         rockCollision.run(moveSequence)
+        rockGapTopCollision.run(moveSequence)
+        rockGapBottomCollision.run(moveSequence)
     }
     
     func startRocks() {
