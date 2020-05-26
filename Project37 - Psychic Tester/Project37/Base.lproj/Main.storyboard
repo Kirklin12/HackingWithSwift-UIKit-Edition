@@ -43,6 +43,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="480" height="320"/>
                     <connections>
                         <outlet property="cardContainer" destination="8TX-9e-Li6" id="z5a-2m-8b7"/>
+                        <outlet property="gradientView" destination="iw1-Pr-q8i" id="vnU-Vo-3UZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
