@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27BF9F93247C2DAC004EC347 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF9F92247C2DAC004EC347 /* CardViewController.swift */; };
+		27BF9F95247D51DB004EC347 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF9F94247D51DB004EC347 /* GradientView.swift */; };
 		27CF415F247C15990038F4EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF415E247C15990038F4EB /* AppDelegate.swift */; };
 		27CF4161247C15990038F4EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4160247C15990038F4EB /* SceneDelegate.swift */; };
 		27CF4163247C15990038F4EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4162247C15990038F4EB /* ViewController.swift */; };
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		27BF9F92247C2DAC004EC347 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		27BF9F94247D51DB004EC347 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		27CF415B247C15990038F4EB /* Project37.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project37.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27CF415E247C15990038F4EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27CF4160247C15990038F4EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				27CF4197247C16160038F4EB /* Content */,
 				27CF415E247C15990038F4EB /* AppDelegate.swift */,
 				27CF4160247C15990038F4EB /* SceneDelegate.swift */,
+				27BF9F94247D51DB004EC347 /* GradientView.swift */,
 				27CF4162247C15990038F4EB /* ViewController.swift */,
 				27BF9F92247C2DAC004EC347 /* CardViewController.swift */,
 				27CF4164247C15990038F4EB /* Main.storyboard */,
@@ -314,6 +317,7 @@
 			files = (
 				27BF9F93247C2DAC004EC347 /* CardViewController.swift in Sources */,
 				27CF4163247C15990038F4EB /* ViewController.swift in Sources */,
+				27BF9F95247D51DB004EC347 /* GradientView.swift in Sources */,
 				27CF415F247C15990038F4EB /* AppDelegate.swift in Sources */,
 				27CF4161247C15990038F4EB /* SceneDelegate.swift in Sources */,
 			);
