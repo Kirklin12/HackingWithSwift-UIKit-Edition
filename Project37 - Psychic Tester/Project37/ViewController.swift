@@ -82,6 +82,24 @@ class ViewController: UIViewController {
         view.isUserInteractionEnabled = true
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: cardContainer)
+        
+        for card in allCards {
+            if card.view.frame.contains(location) {
+                if view.traitCollection.forceTouchCapability == .available {
+                    if touch.force == touch.maximumPossibleForce {
+                        card.front.image = UIImage(named: "cardStar")
+                        card.isCorrect = true
+                    }
+                }
+            }
+        }
+    }
+    
     func cardTapped(_ tapped: CardViewController) {
         guard view.isUserInteractionEnabled == true else { return }
         view.isUserInteractionEnabled = false
