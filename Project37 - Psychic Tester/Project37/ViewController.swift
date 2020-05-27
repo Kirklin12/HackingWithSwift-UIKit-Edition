@@ -6,6 +6,7 @@
 //  Copyright © 2020 Mike. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 class ViewController: UIViewController {
@@ -13,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var gradientView: GradientView!
     
     var allCards = [CardViewController]()
+    var music: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,8 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 20, delay: 0, options: [.allowUserInteraction, .autoreverse, .repeat], animations: {
             self.view.backgroundColor = UIColor.blue
         })
+        
+        playMusic()
     }
 
     @objc func loadCards() {
@@ -118,5 +122,15 @@ class ViewController: UIViewController {
         particleEmitter.emitterCells = [cell]
         
         gradientView.layer.addSublayer(particleEmitter)
+    }
+    
+    func playMusic() {
+        if let musicURL = Bundle.main.url(forResource: "PhantomFromSpace", withExtension: "mp3") {
+            if let audioPlayer = try? AVAudioPlayer(contentsOf: musicURL) {
+                music = audioPlayer
+                music.numberOfLoops = -1 // infinite
+                music.play()
+            }
+        }
     }
 }
