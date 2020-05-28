@@ -8,13 +8,15 @@
 
 import AVFoundation
 import UIKit
+import WatchConnectivity
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WCSessionDelegate {
     @IBOutlet var cardContainer: UIView!
     @IBOutlet var gradientView: GradientView!
     
     var allCards = [CardViewController]()
     var music: AVAudioPlayer!
+    var lastMessage: CFAbsoluteTime = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,12 @@ class ViewController: UIViewController {
         })
         
         playMusic()
+        
+        if (WCSession.isSupported()) {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
     }
 
     @objc func loadCards() {
@@ -96,6 +104,10 @@ class ViewController: UIViewController {
                         card.isCorrect = true
                     }
                 }
+                
+                if card.isCorrect {
+                    sendWatchMesage()
+                }
             }
         }
     }
@@ -150,5 +162,32 @@ class ViewController: UIViewController {
                 music.play()
             }
         }
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    func sendWatchMesage() {
+        let currentTime = CFAbsoluteTimeGetCurrent()
+        
+        if lastMessage + 0.5 > currentTime {
+            return
+        }
+        
+        if (WCSession.default.isReachable) {
+            let message = ["Message": "Hello"]
+            WCSession.default.sendMessage(message, replyHandler: nil)
+        }
+        
+        lastMessage = CFAbsoluteTimeGetCurrent()
     }
 }
