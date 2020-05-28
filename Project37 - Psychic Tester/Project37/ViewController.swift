@@ -32,11 +32,20 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         playMusic()
         
-        if (WCSession.isSupported()) {
+        if WCSession.isSupported() {
             let session = WCSession.default
             session.delegate = self
             session.activate()
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let instructions = "Please ensure your Apple Watch is configured correctly. On your iPhone, launch Apple's 'Watch' configuration app then choose General > Wake Screen. On that screen, please disable Wake Screen On Wrist Raise, then select Wake For 70 Seconds. On your Apple Watch, please swipe on your watch face and enable Silent Mode. You're done!"
+        let ac = UIAlertController(title: "Adjust your settings", message: instructions, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "I'm ready", style: .default))
+        present(ac, animated: true)
     }
 
     @objc func loadCards() {
@@ -183,7 +192,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             return
         }
         
-        if (WCSession.default.isReachable) {
+        if WCSession.default.isReachable {
             let message = ["Message": "Hello"]
             WCSession.default.sendMessage(message, replyHandler: nil)
         }
