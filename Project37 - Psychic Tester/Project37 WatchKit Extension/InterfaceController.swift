@@ -37,6 +37,14 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         hideButton.setHidden(true)
     }
     
+    @IBAction func winMode() {
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            let message = ["Message": "cheatMode"]
+            session.sendMessage(message, replyHandler: nil)
+        }
+    }
+        
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         WKInterfaceDevice().play(.click)
     }

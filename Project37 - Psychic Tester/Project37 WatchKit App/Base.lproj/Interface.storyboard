@@ -17,6 +17,11 @@
                                 <action selector="hideWelcomeText" destination="AgC-eL-Hgc" id="pAJ-JA-JTd"/>
                             </connections>
                         </button>
+                        <button width="1" alignment="left" alpha="0.0" title="Button" id="HPC-e9-hHP">
+                            <connections>
+                                <action selector="winMode" destination="AgC-eL-Hgc" id="bBu-gN-wsT"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="hideButton" destination="4rT-M8-LgH" id="QSy-KN-doS"/>

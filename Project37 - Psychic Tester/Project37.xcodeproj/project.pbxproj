@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		27BF9F93247C2DAC004EC347 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF9F92247C2DAC004EC347 /* CardViewController.swift */; };
 		27BF9F95247D51DB004EC347 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BF9F94247D51DB004EC347 /* GradientView.swift */; };
+		27BF9F9724803325004EC347 /* switch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27BF9F9624803324004EC347 /* switch.mp3 */; };
 		27CF415F247C15990038F4EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF415E247C15990038F4EB /* AppDelegate.swift */; };
 		27CF4161247C15990038F4EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4160247C15990038F4EB /* SceneDelegate.swift */; };
 		27CF4163247C15990038F4EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4162247C15990038F4EB /* ViewController.swift */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		27BF9F92247C2DAC004EC347 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		27BF9F94247D51DB004EC347 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		27BF9F9624803324004EC347 /* switch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = switch.mp3; sourceTree = "<group>"; };
 		27CF415B247C15990038F4EB /* Project37.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project37.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27CF415E247C15990038F4EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27CF4160247C15990038F4EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		27CF4197247C16160038F4EB /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				27BF9F9624803324004EC347 /* switch.mp3 */,
 				27CF4198247C16160038F4EB /* PhantomFromSpace.mp3 */,
 				27CF4199247C16160038F4EB /* README.txt */,
 			);
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27CF419D247C167F0038F4EB /* README.md in Resources */,
+				27BF9F9724803325004EC347 /* switch.mp3 in Resources */,
 				27CF416B247C159E0038F4EB /* LaunchScreen.storyboard in Resources */,
 				27CF419A247C16160038F4EB /* PhantomFromSpace.mp3 in Resources */,
 				27CF4168247C159E0038F4EB /* Assets.xcassets in Resources */,

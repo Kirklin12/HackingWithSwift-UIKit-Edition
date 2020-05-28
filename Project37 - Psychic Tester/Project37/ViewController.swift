@@ -17,6 +17,7 @@ class ViewController: UIViewController, WCSessionDelegate {
     var allCards = [CardViewController]()
     var music: AVAudioPlayer!
     var lastMessage: CFAbsoluteTime = 0
+    var cheatMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             self.view.backgroundColor = UIColor.blue
         })
         
-        playMusic()
+        playMusic(source: "PhantomFromSpace")
         
         if WCSession.isSupported() {
             let session = WCSession.default
@@ -74,6 +75,11 @@ class ViewController: UIViewController, WCSessionDelegate {
         let star = UIImage(named: "cardStar")!
         
         var images = [circle, circle, cross, cross, lines, lines, square, star]
+        
+        if cheatMode {
+            images = [star, star, star, star, star, star, star, star]
+        }
+
         images.shuffle()
         
         for (index, position) in positions.enumerated() {
@@ -163,12 +169,15 @@ class ViewController: UIViewController, WCSessionDelegate {
         gradientView.layer.addSublayer(particleEmitter)
     }
     
-    func playMusic() {
-        if let musicURL = Bundle.main.url(forResource: "PhantomFromSpace", withExtension: "mp3") {
+    func playMusic(source: String) {
+        if let musicURL = Bundle.main.url(forResource: source, withExtension: "mp3") {
             if let audioPlayer = try? AVAudioPlayer(contentsOf: musicURL) {
                 music = audioPlayer
-                music.numberOfLoops = -1 // infinite
                 music.play()
+            }
+            
+            if source == "PhantomFromSpace" {
+                music.numberOfLoops = -1 // infinite
             }
         }
     }
@@ -198,5 +207,13 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
         
         lastMessage = CFAbsoluteTimeGetCurrent()
+    }
+    
+    func sessionWatchStateDidChange(_ session: WCSession) {
+        playMusic(source: "switch")
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        cheatMode = true
     }
 }
