@@ -17,6 +17,8 @@
 		27BF9FAE24811F84004EC347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27BF9FAD24811F84004EC347 /* Assets.xcassets */; };
 		27BF9FB124811F84004EC347 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27BF9FAF24811F84004EC347 /* LaunchScreen.storyboard */; };
 		27BF9FB924811FA1004EC347 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 27BF9FB824811FA1004EC347 /* README.md */; };
+		27D919012482A8530035C404 /* Commit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D918FF2482A8520035C404 /* Commit+CoreDataClass.swift */; };
+		27D919022482A8530035C404 /* Commit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D919002482A8520035C404 /* Commit+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		27BF9FB024811F84004EC347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27BF9FB224811F84004EC347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27BF9FB824811FA1004EC347 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		27D918FF2482A8520035C404 /* Commit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Commit+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		27D919002482A8520035C404 /* Commit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Commit+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,8 @@
 		27BF9FA324811F82004EC347 /* Project38 */ = {
 			isa = PBXGroup;
 			children = (
+				27D918FF2482A8520035C404 /* Commit+CoreDataClass.swift */,
+				27D919002482A8520035C404 /* Commit+CoreDataProperties.swift */,
 				27BF9FA424811F82004EC347 /* AppDelegate.swift */,
 				27BF9FA624811F82004EC347 /* SceneDelegate.swift */,
 				27BF9FA824811F82004EC347 /* ViewController.swift */,
@@ -152,10 +158,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				27BF9FA924811F82004EC347 /* ViewController.swift in Sources */,
+				27D919012482A8530035C404 /* Commit+CoreDataClass.swift in Sources */,
 				27BF9FA524811F82004EC347 /* AppDelegate.swift in Sources */,
 				27960A5B248124D3005871A8 /* DetailViewController.swift in Sources */,
 				27BF9FA724811F82004EC347 /* SceneDelegate.swift in Sources */,
 				27960A5E24813BE6005871A8 /* Project38.xcdatamodeld in Sources */,
+				27D919022482A8530035C404 /* Commit+CoreDataProperties.swift in Sources */,
 				27960A59248120C9005871A8 /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
