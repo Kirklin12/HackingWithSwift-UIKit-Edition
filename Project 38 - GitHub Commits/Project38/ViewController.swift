@@ -12,6 +12,7 @@ import UIKit
 class ViewController: UITableViewController {
     var container: NSPersistentContainer!
     var commits = [Commit]()
+    var commitPredicate: NSPredicate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,8 @@ class ViewController: UITableViewController {
                 print("Unresolved error \(error)")
             }
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(changeFilter))
         
         performSelector(inBackground: #selector(fetchCommits), with: nil)
         loadSavedData()
@@ -92,6 +95,7 @@ class ViewController: UITableViewController {
     func loadSavedData() {
         let request = Commit.createFetchRequest()
         let sort = NSSortDescriptor(key: "date", ascending: false)
+        request.predicate = commitPredicate
         request.sortDescriptors = [sort]
         
         do {
@@ -101,5 +105,38 @@ class ViewController: UITableViewController {
         } catch {
             print("Fetch failed")
         }
+    }
+    
+    @objc func changeFilter() {
+        let ac = UIAlertController(title: "Filter commits...", message: nil, preferredStyle: .actionSheet)
+        
+        // this predicate matches only objects that contain a string somewhere in their message
+        // [c] means "case-insensitive", will match "FIX", "Fix", "fix" etc.
+        ac.addAction(UIAlertAction(title: "Show only fixes", style: .default) { [unowned self] _ in
+            self.commitPredicate = NSPredicate(format: "message CONTAINS[c] 'fix'")
+            self.loadSavedData()
+        })
+        
+        // will match only objects that don't begin with 'Merge pull request'
+        ac.addAction(UIAlertAction(title: "Ignore Pull Requests", style: .default) { [unowned self] _ in
+            self.commitPredicate = NSPredicate(format: "NOT message BEGINSWITH 'Merge pull request'")
+            self.loadSavedData()
+        })
+        
+        // request only commits that took place 43,200 seconds ago
+        ac.addAction(UIAlertAction(title: "Show only recent", style: .default) { [unowned self] _ in
+            let twelveHoursAgo = Date().addingTimeInterval(-43200)
+            self.commitPredicate = NSPredicate(format: "date > %@", twelveHoursAgo as NSDate)
+            self.loadSavedData()
+        })
+        
+        // request all commits
+        ac.addAction(UIAlertAction(title: "Show all commits", style: .default) { [unowned self] _ in
+            self.commitPredicate = nil
+            self.loadSavedData()
+        })
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
     }
 }
