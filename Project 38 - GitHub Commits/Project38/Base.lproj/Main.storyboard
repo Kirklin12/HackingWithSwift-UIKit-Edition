@@ -59,26 +59,9 @@
                     <view key="view" contentMode="scaleToFill" id="0LI-an-4L2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGM-Ka-lE6">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="d7c-ij-qEW" firstAttribute="bottom" secondItem="mGM-Ka-lE6" secondAttribute="bottom" id="0fT-81-XC8"/>
-                            <constraint firstItem="mGM-Ka-lE6" firstAttribute="top" secondItem="d7c-ij-qEW" secondAttribute="top" id="Spn-Rh-dte"/>
-                            <constraint firstItem="mGM-Ka-lE6" firstAttribute="leading" secondItem="d7c-ij-qEW" secondAttribute="leading" id="fRC-dK-gWC"/>
-                            <constraint firstItem="d7c-ij-qEW" firstAttribute="trailing" secondItem="mGM-Ka-lE6" secondAttribute="trailing" id="zYB-DE-Fju"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="d7c-ij-qEW"/>
                     </view>
-                    <connections>
-                        <outlet property="detailLabel" destination="mGM-Ka-lE6" id="Bi5-4f-C8d"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JeQ-jr-JuT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

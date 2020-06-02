@@ -7,17 +7,24 @@
 //
 
 import UIKit
+import WebKit
 
-class DetailViewController: UIViewController {
-    @IBOutlet var detailLabel: UILabel!
+class DetailViewController: UIViewController, WKNavigationDelegate {
+    var webView: WKWebView!
     var detailItem: Commit?
+        
+    override func loadView() {
+        webView = WKWebView()
+        webView.navigationDelegate = self
+        view = webView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let detail = self.detailItem {
-            detailLabel.text = detail.message
-            //navigationItem.rigthBarButtonItem = UIBarButtonItem(title: "Commit 1/\(detail.author.commits.count)", style: .plain, target: self, action: #selector(showAuthorCommits))
+            let url = URL(string: detail.url)!
+            webView.load(URLRequest(url: url))
         }
     }
 }
