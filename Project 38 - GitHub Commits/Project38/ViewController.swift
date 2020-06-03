@@ -13,6 +13,7 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
     var container: NSPersistentContainer!
     var commitPredicate: NSPredicate?
     var fetchedResultsController: NSFetchedResultsController<Commit>!
+    var defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
         
         performSelector(inBackground: #selector(fetchCommits), with: nil)
         loadSavedData()
+        
+        let array = defaults.object(forKey:"Commit") as? [Commit] ?? [Commit]()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
