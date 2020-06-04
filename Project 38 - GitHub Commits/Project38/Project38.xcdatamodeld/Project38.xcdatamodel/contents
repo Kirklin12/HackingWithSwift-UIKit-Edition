@@ -21,7 +21,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="Commit" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="Author" positionX="-54" positionY="18" width="128" height="88"/>
+        <element name="Commit" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>

@@ -13,7 +13,6 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
     var container: NSPersistentContainer!
     var commitPredicate: NSPredicate?
     var fetchedResultsController: NSFetchedResultsController<Commit>!
-    //var defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -216,7 +215,14 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .automatic)
+            if tableView.numberOfRows(inSection: indexPath!.section) > 1 {
+                tableView.deleteRows(at: [indexPath!], with: .automatic)
+            } else {
+                let section = indexPath!.section
+                let indexSet = IndexSet(integer: section)
+               
+                tableView.deleteSections(indexSet, with: .automatic)
+            }
             
         default:
             break
