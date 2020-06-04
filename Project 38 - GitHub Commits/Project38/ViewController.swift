@@ -13,7 +13,7 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
     var container: NSPersistentContainer!
     var commitPredicate: NSPredicate?
     var fetchedResultsController: NSFetchedResultsController<Commit>!
-    var defaults = UserDefaults.standard
+    //var defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
         performSelector(inBackground: #selector(fetchCommits), with: nil)
         loadSavedData()
         
-        let array = defaults.object(forKey:"Commit") as? [Commit] ?? [Commit]()
+        //let array = defaults.object(forKey:"Commit") as? [Commit] ?? [Commit]()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -213,7 +213,7 @@ class ViewController: UITableViewController, NSFetchedResultsControllerDelegate 
         return formatter.string(from: Date(timeIntervalSince1970: 0))
     }
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .automatic)
