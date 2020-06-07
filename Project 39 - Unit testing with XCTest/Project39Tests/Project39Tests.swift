@@ -35,4 +35,26 @@ class Project39Tests: XCTestCase {
             _ = PlayData()
         }
     }
+    
+    func testUserFilterWorks() {
+        let playData = PlayData()
+        
+        playData.applyUserFilter("100")
+        XCTAssertEqual(playData.filteredWords.count, 495, "100 does not appear 495 times")
+        
+        playData.applyUserFilter("1000")
+        XCTAssertEqual(playData.filteredWords.count, 55, "1000 does not appear 55 times")
+        
+        playData.applyUserFilter("10000")
+        XCTAssertEqual(playData.filteredWords.count, 1, "10000 does not appear 1 time")
+        
+        playData.applyUserFilter("test")
+        XCTAssertEqual(playData.filteredWords.count, 56, "test does not appear 56 times")
+        
+        playData.applyUserFilter("swift")
+        XCTAssertEqual(playData.filteredWords.count, 7, "swift does not appear 7 times")
+        
+        playData.applyUserFilter("objective-c")
+        XCTAssertEqual(playData.filteredWords.count, 0, "objective-c does not appear 0 times")
+    }
 }
