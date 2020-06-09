@@ -52,4 +52,10 @@ class Project39UITests: XCTestCase {
         
         XCTAssertEqual(app.tables.cells.count, 56, "There should be 56 words matching 'test'")
     }
+    
+    func testCancelTapped() {
+        let app = XCUIApplication()
+        app.buttons["Search"].tap()
+        app.buttons["Cancel"].tap()
+    }
 }

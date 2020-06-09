@@ -36,7 +36,7 @@ class ViewController: UITableViewController {
         
         ac.addAction(UIAlertAction(title: "Filter", style: .default) { [unowned self] _ in
             let userInput = ac.textFields?[0].text ?? "0"
-            self.playData.applyUserFilter(userInput)
+            self.playData.applyUserFilter(userInput.isEmpty ? "0" : userInput)
             self.tableView.reloadData()
         })
         

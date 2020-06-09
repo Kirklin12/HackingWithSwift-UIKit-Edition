@@ -57,4 +57,19 @@ class Project39Tests: XCTestCase {
         playData.applyUserFilter("objective-c")
         XCTAssertEqual(playData.filteredWords.count, 0, "objective-c does not appear 0 times")
     }
+    
+    func testUserFilter1000() {
+        let playData = PlayData()
+        
+        playData.applyUserFilter("at")
+        XCTAssertEqual(playData.filteredWords.count, 55, "There isn't 55 rows for this word")
+    }
+    
+    func testApplyUserFilterPerformance() {
+        let playData = PlayData()
+        
+        measure {
+            _ = playData.applyUserFilter("100")
+        }
+    }
 }
